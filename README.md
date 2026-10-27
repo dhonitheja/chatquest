@@ -27,12 +27,16 @@ The hosted static edition is a demo with cross-tab synchronization in the same b
 - `!charge`: Crystal Bridge only, once per hero.
 - `!grow`: Shadow Forest only, once per hero.
 
-Start each chapter from the controls. Pause freezes time and gameplay. Next chapter can skip the current encounter. Reset clears the campaign after confirmation. Retry chapter restores that chapter’s starting scores, powers, health, and timer without clearing the party. Lock vote closes voting early. The chosen route changes the boss encounter. Crystal Bridge gives 45 seconds, 15-damage attacks, and one `!charge` per hero that adds 25 damage to the next attack. Shadow Forest gives 75 seconds, 8-damage attacks, and one `!grow` per hero that restores 5 seconds, capped at 100 seconds remaining. Boss health scales to party size when chapter three opens (80–600 HP). The victory screen credits all heroes and displays guild scores.
+Start each chapter from the controls. Pause freezes time and gameplay. Next chapter can skip the current encounter. Reset clears the campaign after confirmation. Retry chapter restores that chapter’s starting scores, powers, health, and timer without clearing the party. Lock vote closes voting early. The chosen route changes the boss encounter. Crystal Bridge gives 45 seconds, 15-damage attacks, and one `!charge` per hero that adds 25 damage to the next attack. Shadow Forest gives 75 seconds, 8-damage attacks, and one `!grow` per hero that restores 5 seconds, capped at 100 seconds remaining. Boss health scales to party size when chapter three starts (80–600 HP). The victory screen credits all heroes and displays guild scores.
 
 ## Verification
 
-Run `npm test`. Tests cover both route mechanics, one-time powers, vote replacement, cooldown, victory, timeout, chapter retries, paused gameplay, invalid commands, and reserved object property names. Live Twitch authentication and OBS require your accounts and local setup and have not been verified automatically.
+Run `npm test`. Eleven tests cover Twitch message parsing and duplicate delivery, case-insensitive hero names, late joins, elapsed countdown updates, empty vote results, and both route mechanics, one-time powers, vote replacement, cooldown, victory, timeout, chapter retries, paused gameplay, invalid commands, and reserved object property names. Live Twitch authentication and OBS require your accounts and local setup and have not been verified automatically.
 
 ## Submission preparation
 
 Record a real Twitch session and Codex build footage in a public YouTube demo under three minutes. Provide this source repository, run instructions, project description, and the Codex session ID from the main build chat. No AI model runs during gameplay; Codex was used to build the project. This is an MVP, not a submitted entry.
+
+## Accuracy and connection handling
+
+Hero identities use lowercase login names. Extra spaces in commands are accepted. No-vote results explicitly identify the default route. Countdown updates use elapsed time so a delayed browser callback catches up. Twitch message IDs suppress duplicate deliveries (bounded to the most recent 2,000 messages). The interface shows paused, disconnected, and reconnecting states and reports a channel join timeout after 15 seconds. Live account and OBS verification is still pending.
